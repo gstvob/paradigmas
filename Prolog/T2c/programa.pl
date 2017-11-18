@@ -1,25 +1,38 @@
 /*
    Programacao Logica - Prof. Alexandre G. Silva - 30set2015
      Versao inicial     : 30set2015
+     Adicao de gramatica: 15out2015
+     Atualizacao        : 12out2016
+     Atualizacao        : 10mai2017
      Ultima atualizacao : 12set2017
 
    RECOMENDACOES:
-
+   
    - O nome deste arquivo deve ser 'programa.pl'
-
    - O nome do banco de dados deve ser 'desenhos.pl'
-
-   - Dicas de uso podem ser obtidas na execucação:
+   - O nome do arquivo de gramatica deve ser 'gramatica.pl'
+   
+   - Dicas de uso podem ser obtidas na execucação: 
      ?- menu.
-
+     
    - Exemplo de uso:
      ?- load.
-     ?- searchAll(id1).
+     ?- searchAll(1).
 
+   - Exemplos de uso da gramatica:
+     ?- comando([pf, '10'], []).
+     Ou simplesmente:
+     ?- cmd("pf 10").
+   
+     ?- comando([repita, '5', '[', pf, '50', gd, '45', ']'], []).
+     Ou simplesmente:
+     ?- cmd("repita 5[pf 50 gd 45]").
+     
    - Colocar o nome e matricula de cada integrante do grupo
      nestes comentarios iniciais do programa
 */
 
+:- set_prolog_flag(double_quotes, codes).
 :- initialization(load).
 
 % Exibe menu principal
@@ -33,7 +46,11 @@ menu :-
 
 % Apaga os predicados 'xy' da memoria e carrega os desenhos a partir de um arquivo de banco de dados
 load :-
+    consult('gramatica.pl'),
     retractall(xy(_,_,_)),
+    retractall(xylast(_,_,_)),
+    retractall(angle(_)),
+    retractall(active(_)),
     open('desenhos.pl', read, Stream),
     repeat,
         read(Stream, Data),
@@ -46,7 +63,10 @@ commit :-
     open('desenhos.pl', write, Stream),
     telling(Screen),
     tell(Stream),
-    listing(xy),  %listagem dos predicados 'xy'
+    listing(xylast),  %listagem dos predicados 'xylast'
+    listing(angle),   %listagem dos predicados 'angle'
+    listing(active),  %listagem dos predicados 'active'
+    listing(xy),      %listagem dos predicados 'xy'
     tell(Screen),
     close(Stream).
 
@@ -172,8 +192,37 @@ figuraclone(Id, X, Y):-
     insereRest(Lnew, Idnew).
 
 
+%Questão 2 T2C.	
 
+figuraparafrente(Id, N) :-
+	angle(Teta),
+	searchId(Id, L),
+	pegaPrim(L, X1, Y1),	
+	Alfa is (Teta*pi)/180,
+	X is N* Alfa,	
+	Y is -1 * (N * Alfa),
+	Xn is (X1 + X),
+	Yn is (Y1 + Y),
+	write([Id, X1, Y1]), nl,
+	write([Id, Xn, Yn]), nl,
+	retract(xy(Id, X1, Y1)),
+	assert(xy(Id, Xn, Yn)).
+	
 
+%questao 3 T2c - basicamente o andar pra frente sem o -1 no Y.
+figuraparatras(Id, N) :-
+	angle(Teta),
+	searchId(Id, L),
+	pegaPrim(L, X1, Y1),	
+	Alfa is (Teta*pi)/180,
+	X is N * Alfa,	
+	Y is N * Alfa,
+	Xn is (X1 + X),
+	Yn is (Y1 + Y),
+	write([Id, X1, Y1]), nl,
+	write([Id, Xn, Yn]), nl,
+	retract(xy(Id, X1, Y1)),
+	assert(xy(Id, Xn, Yn)).
 
 
 
