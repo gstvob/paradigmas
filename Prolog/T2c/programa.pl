@@ -281,9 +281,9 @@ figuraparatras(Id, N) :-
 	updatePositions(Id, X, Y, L).
 
 %questao 4 T2c
-figuragiraesquerda(Angle) :-
+figuragiraesquerda(Id, Angle) :-
     true.
 
 %questao 5 T2c
-figuragiradireita(Angle) :-
+figuragiradireita(Id, Angle) :-
     true.
