@@ -1,10 +1,6 @@
-:- dynamic figureangle/2.
-
-figureangle(1, 90).
-
 :- dynamic xylast/3.
 
-xylast(1, 500, 500).
+xylast(1, 20, 20).
 
 :- dynamic angle/1.
 
@@ -16,7 +12,6 @@ active(1).
 
 :- dynamic xy/3.
 
-xy(1, 50, 50).
-xy(1, 20, 20).
-
+xy(1, 50.0, 50.0).
+xy(1, 20.0, 20.0).
 
