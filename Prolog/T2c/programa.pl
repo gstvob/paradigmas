@@ -282,11 +282,11 @@ figuraparatras(Id, N) :-
 	assert(xy(Id, Xn, Yn)).
 
 %questao 4 T2c
-giraesquerda(Angle) :-
+figuragiraesquerda(Angle) :-
     true.
 
 %questao 5 T2c
-giradireita(Angle) :-
+figuragiradireita(Angle) :-
     true.
 
 
