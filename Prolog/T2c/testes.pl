@@ -7,7 +7,7 @@ testefigclone :-
 
 testefigpf :-
   consult('programa.pl'),
-  cmd("figpf 1 7"),
+  cmd("figpf 1 15"),
   commit.
 
 testefigpt :-

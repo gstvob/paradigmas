@@ -7,7 +7,10 @@
 \usepackage{listings} % to show code
 \usepackage{xcolor} % to colors
 \usepackage{hyperref} % to links
+\usepackage{graphicx} % to have pictures
+\usepackage{float} % my figure, my place
 
+\graphicspath{{svg/}}
 
 \lstset{
   language=Prolog,
@@ -52,9 +55,43 @@
 \lstinputlisting{testes.pl}
 
 \section{Imagens}
+Essa foi a imagem utilizada antes da execução de qualquer um dos testes:
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{antes_testes.png}
+  \caption{Figura base}
+\end{figure}
+
+Após a execução do \emph{testefigclone} essa é a imagem resultante:
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{01_depois_testefigclone.png}
+  \caption{Figura após testefigclone}
+\end{figure}
+
+A partir da figura base e após a execução do \emph{testefigpf} a imagem resultante é:
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{02_depois_testefigpf.png}
+  \caption{Figura após testefigpf}
+\end{figure}
+
+Novamente a partir da figura base e após a execução do \emph{testefigpt} a imgem resultante é:
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{03_depois_testefigpt.png}
+  \caption{Figura após testefigpt}
+\end{figure}
+
+Mais uma vez a partir da figura base e após a execução do \emph{testefiggd} a imagem resultante é:
+% \begin{figure}[h]
+%   \includegraphics[width=\linewidth]{04_depois_testefiggd.png}
+%   \caption{Figura após testefiggd}
+% \end{figure}
+
+Por fim, a partir também da figura base e após a execução do \emph{testefigge} a imagem resultante é:
+% \begin{figure}[h]
+%   \includegraphics[width=\linewidth]{05_depois_testefigge.png}
+%   \caption{Figura após testefigge}
+% \end{figure}
 
 \section{Código-fonte}
 \href{https://github.com/lucasjoao/paradigmas/tree/master/Prolog/T2c}
 {GitHub}
-
 \end{document}
