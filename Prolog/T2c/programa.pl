@@ -249,36 +249,34 @@ figuraclone(Id, X, Y):-
     write([Idnew, X, Y]),
     insereRest(Lnew, Idnew).
 
+
 %Questão 2 T2C.
-updatePositions(Id, X, Y, [H|T]) :-
-	splitP(H, X1, Y1),
-	Xn is (X1 + X),
-	Yn is (Y1 + Y),
-	retract(xy(Id,X1,Y1)),
-	assert(xy(Id, Xn, Yn)),
-	write([Id, Xn, Yn]), nl,
-	updatePositions(Id, X, Y, T).
-
-updatePositions(Id, X, Y, [H|T]) :- last([H|T], H), !.
-
 figuraparafrente(Id, N) :-
 	angle(Teta),
-	searchId(Id, L),
-	Alfa is (Teta*pi)/180,
-	X is N* Alfa,
-	Y is -1 * (N * Alfa),
-	updatePositions(Id, X, Y, L).
-
+	searchId(Id, Lista),
+	pegaPrim(Lista, X1, Y1),
+	Alfa is Teta * pi/180,
+	X is N * cos(Alfa),
+	Y is -1 *  (N * sin(Alfa)),
+	Xn is (X1 + X),
+	Yn is (Y1 + Y),
+	write([Id, Xn, Yn]), nl,
+	retract(xy(Id, X1, Y1)),
+	asserta(xy(Id,Xn, Yn)). %TEM QUE USAR O ASSERTA PRA COLOCAR NO INICIO EU NÃO ACREDITO QUE ERA ISSO O PROBLEMA ;-;.
 
 %questao 3 T2c - basicamente o andar pra frente sem o -1 no Y.
 figuraparatras(Id, N) :-
 	angle(Teta),
 	searchId(Id, L),
 	pegaPrim(L, X1, Y1),
-	Alfa is (Teta*pi)/180,
-	X is N * Alfa,
-	Y is N * Alfa,
-	updatePositions(Id, X, Y, L).
+	Alfa is Teta*pi/180,
+	X is N * cos(Alfa),
+	Y is N * sin(Alfa),
+	Xn is (X1 + X),
+	Yn is (Y1 + Y),
+	write([Id, Xn, Yn]), nl,
+	retract(xy(Id, X1, Y1)),
+    asserta(xy(Id, Xn, Yn)).
 
 %questao 4 T2c
 figuragiraesquerda(Id, Angle) :-
