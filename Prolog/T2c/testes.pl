@@ -12,7 +12,7 @@ testefigpf :-
 
 testefigpt :-
   consult('programa.pl'),
-  cmd("figpt 1 40"),
+  cmd("figpt 1 100"),
   commit.
 
 testefiggd :-
