@@ -279,9 +279,27 @@ figuraparatras(Id, N) :-
     asserta(xy(Id, Xn, Yn)).
 
 %questao 4 T2c
-figuragiraesquerda(Id, Angle) :-
-    true.
+giraponto(Id, Mult, Angle, [Head|Tail]) :-
+    [Xvelho, Yvelho] = Head,
+    Teta is Mult * Angle * pi/180,
+    X is (Xvelho * cos(Teta)) - (Yvelho * sin(Teta)),
+    Y is (Xvelho * sin(Teta)) + (Yvelho * cos(Teta)),
+	assertz(xy(Id, X, Y)),
+	giraponto(Id, Mult, Angle, Tail).
+
+figuragiradireita(Id, Angle) :-
+    searchId(Id, L),
+    retractall(xy(Id, _, _)),
+    [CoordInicial|Tail] = L,
+    [X, Y] = CoordInicial,
+    assert(xy(Id, X, Y)),
+    giraponto(Id, 1, Angle, Tail).
 
 %questao 5 T2c
-figuragiradireita(Id, Angle) :-
-    true.
+figuragiraesquerda(Id, Angle) :-
+    searchId(Id, L),
+    retractall(xy(Id, _, _)),
+    [CoordInicial|Tail] = L,
+    [X, Y] = CoordInicial,
+    assert(xy(Id, X, Y)),
+    giraponto(Id, -1, Angle, Tail).

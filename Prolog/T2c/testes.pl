@@ -22,5 +22,5 @@ testefiggd :-
 
 testefigge :-
   consult('programa.pl'),
-  cmd("figge 1 90"),
+  cmd("figge 1 45"),
   commit.
